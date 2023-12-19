@@ -1,16 +1,16 @@
 const express = require("express");
 const app = express();
 const createCRUDRouter=require('./server/server.js')
-require("./connect");
-const Account = require();
-const Category = require();
-const Product = require();
-const Order = require();
-const Shipping = require();
-const Notification = require();
-const Offer = require();
-const Transaction = require();
-const Port = 8080;
+require("./models/connect.js");
+const Account = require("./models/Account.js");
+const Category = require("./models/Category.js");
+const Product = require("./models/Product.js");
+const Order = require("./models/Order.js");
+const Shipping = require("./models/Shipping.js");
+const Notification = require("./models/Notification.js");
+const Offer = require("./models/Offer.js");
+const Transaction = require("./models/Transaction.js");
+const Port = 8900;
 app.use(express.json());
 
 app.use('/products', createCRUDRouter(Product));
@@ -25,9 +25,9 @@ app.use('/notification', createCRUDRouter(Notification));
 
 app.use('/Offer', createCRUDRouter(Offer));
 
-app.use('/Offer', createCRUDRouter(Shipping));
+app.use('/Shipping', createCRUDRouter(Shipping));
 
-app.use('/Offer', createCRUDRouter(Transaction));
+app.use('/Transaction', createCRUDRouter(Transaction));
 
 
 app.listen(Port, () => {

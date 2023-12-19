@@ -24,5 +24,5 @@ const NotifSchema = new mongoose.Schema({
 });
 
 // Export the model
-const Notification = mongoose.model('Shipping', NotifSchema);
+const Notification = mongoose.model('Notification', NotifSchema);
 module.exports = Notification;
