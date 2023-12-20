@@ -1,5 +1,5 @@
 const express = require('express');
-const crudFunctions = require('../patterns/controllers');
+const crudFunctions = require('../controllers/crudPattern');
 
 const createCRUDRouter = (model) => {
   const router = express.Router();

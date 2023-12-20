@@ -1,0 +1,29 @@
+version: '3'
+services:
+  api:
+    container_name: api_container
+    image: node:20
+    ports:
+      - "8090:8090"
+    depends_on:
+      - mongo
+    build: .
+    environment:
+      - WAIT_HOSTS=mongo:27017
+    networks:
+      - mynetwork
+  mongo:
+    image: mongo:latest
+    container_name: mongodb_container
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - mynetwork
+volumes:
+  mongo_data:
+networks:
+  mynetwork:
+    driver: bridge
