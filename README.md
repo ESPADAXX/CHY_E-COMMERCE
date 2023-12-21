@@ -7,10 +7,8 @@ git push
 
 git pull
 
-----Main divient une copie exacte de Chouaib.
-git checkout main
-git merge --strategy=ours Chouaib
-git push origin main
+git checkout (branche-cible)
+git merge (ma-branche)
 
 ### COMMANDES GIT :
 
