@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const {Schema, model} = require('mongoose');
 
-const AccountSchema = new mongoose.Schema({
+const AccountSchema = new Schema({
     fullName: {
         type: String,
         required: true
@@ -15,34 +15,35 @@ const AccountSchema = new mongoose.Schema({
         required: true
     },
     phoneNumber: {
-        type: Number,
-        required: true
+        type: String,
+        required: false,
+        unique : true,
     },
     address: {
-        type: Array,
-        default : [],
-        required: true
+        type: String,
+        required: false
     },
     isAdmin: {
         type: Boolean,
-        default: false
+        default: false,
+        required : false
     },
     wishlist: {
         type: Array,
-        default: []
+        required : false
     },
-    resetPasswordToken : String,
-    resetPasswordExpires : Date,
     createdAt: {
         type: Date,
-        default: Date.now
+        default: Date.now(),
+        required : false
     },
     lastLogin: {
         type: Date,
-        default: Date.now
+        default: Date.now(),
+        required : false
     }
 });
 
 // Export the model
-const Account = mongoose.model('Account', AccountSchema);
+const Account = model('Account', AccountSchema);
 module.exports = Account;
