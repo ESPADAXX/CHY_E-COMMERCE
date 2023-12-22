@@ -1,12 +1,22 @@
 const express = require('express');
-const crudFunctions = require('../controllers/crudPattern');
-
+const crudFunctions = require('../controllers/crudPatternController');
+const mongoose = require('mongoose');
 const createCRUDRouter = (model) => {
   const router = express.Router();
 
   router.get('/', async (req, res) => {
     try {
       const data = await crudFunctions.find(model);
+      res.json(data);
+    } catch (error) {
+      console.error('Error in getting all items:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  router.get('/:id', async (req, res) => {
+    try {
+      const id= req.params.id
+      const data = await crudFunctions.findById(model,id);
       res.json(data);
     } catch (error) {
       console.error('Error in getting all items:', error);
