@@ -16,12 +16,12 @@ const AccountSchema = new mongoose.Schema({
     },
     phoneNumber: {
         type: Number,
-        required: true
+        required: false
     },
     address: {
         type: Array,
         default : [],
-        required: true
+        required: false
     },
     isAdmin: {
         type: Boolean,
@@ -29,10 +29,9 @@ const AccountSchema = new mongoose.Schema({
     },
     wishlist: {
         type: Array,
-        default: []
+        default: [],
+        required: false
     },
-    resetPasswordToken : String,
-    resetPasswordExpires : Date,
     createdAt: {
         type: Date,
         default: Date.now

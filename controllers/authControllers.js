@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const AccountModel = require("../models/Account");
 require("dotenv").config();
-export const register = async (req, res) => {
+exports.register = async (req, res) => {
   // Get data from http request body
   let username = req.body.username;
   let password = req.body.password;
@@ -31,7 +31,7 @@ export const register = async (req, res) => {
     });
   }
 };
-export const login = async (req, res) => {
+exports.login = async (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
 
