@@ -62,3 +62,4 @@ const createCRUDRouter = (model) => {
 };
 
 module.exports = createCRUDRouter;
+
