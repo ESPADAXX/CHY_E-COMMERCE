@@ -1,57 +1,75 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require("mongoose");
+const Product = require("./Product");
+const Account = require("./Account");
+const orderStatusEnum = [
+  "pending",
+  "processing",
+  "shipped",
+  "delivered",
+  "cancelled",
+];
 
-const OrderSchema = new mongoose.Schema({
-    products: {
-        type: Array,
-        required:true,
-        default: []
-    },
-    timestamp: {
-        type: Date,
-        default: Date.now
-    },
-    totalPrice: {
-        type: Number,
-        default: 0
-    },
-    status: {
-        type: String,
-        default: 'pending'
-    },
-    paymentMethod: {
-        type: String,
-        default: 'cash'
-    },
-    customer: {
-        type: String,
-        required: true
-    },
-    discount: {
-        type: Number,
-        default: 0
-    },
-    tax:{
-        type: Number,
-        default: 0
-    },
-    shippingAddress:{
-        type: Object,
-        required: true
-    },
-    trackingNumber:{
-        type: String,
-        default: ''
-    },
-    billingAddress:{
-        type: Object,
-        required: true
-    },
-    orderNotes:{
-        type: String,
-        default: ''
-    }
-})
+const paymentMethodEnum = [
+  "cash",
+  "credit_card",
+  "paypal",
+  "other"
+];
+
+const OrderSchema = new Schema({
+  products: {
+    type: [Schema.Types.ObjectId],
+    ref: "Product",
+    default: [],
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now,
+  },
+  totalPrice: {
+    type: Number,
+    default: 0,
+  },
+  status: {
+    type: String,
+    default: orderStatusEnum[0],
+    enum: orderStatusEnum,
+  },
+  paymentMethod: {
+    type: String,
+    default: paymentMethodEnum[0],
+    enum: paymentMethodEnum,
+  },
+  customer: {
+    type: Schema.Types.ObjectId,
+    ref: "Account",
+  },
+  discount: {
+    type: Number,
+    default: 0,
+  },
+  tax: {
+    type: Number,
+    default: 0,
+  },
+  shippingAddress: {
+    type: String,
+    required: true,
+  },
+  trackingNumber: {
+    type: String,
+    default: "",
+  },
+  billingAddress: {
+    type: String,
+    required: true,
+  },
+  orderNotes: {
+    type: String,
+    default: "",
+  },
+});
 
 // Export the model
-const Order = mongoose.model('Order', OrderSchema);
+const Order = model("Order", OrderSchema);
 module.exports = Order;

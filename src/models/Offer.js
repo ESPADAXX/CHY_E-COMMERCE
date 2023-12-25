@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-
-const OfferSchema = new mongoose.Schema({
+const {Schema , model} = require('mongoose');
+const Product = require("./Product")
+const OfferSchema = new Schema({
     code: {
         type: String,
         required: true
@@ -15,7 +15,6 @@ const OfferSchema = new mongoose.Schema({
     },
     discountValue: {
         type: Number,
-        default: "unread"
     },
     validFrom: {
         type: Date,
@@ -30,11 +29,12 @@ const OfferSchema = new mongoose.Schema({
         required: true
     },
     applicableProducts: {
-        type: Array,
+        type: Schema.Types.ObjectId,
+        ref: 'Product',
         required: true
     },
 });
 
 // Export the model
-const Offer = mongoose.model('Offer', OfferSchema);
+const Offer = model('Offer', OfferSchema);
 module.exports = Offer;

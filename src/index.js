@@ -10,13 +10,15 @@ app.use(
   cors({
     credentials: false,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    origin: ["http://localhost:3000" /*"https://NAMEPROJECT.netlify.app"*/],
+    origin: ["http://localhost:3000"],
   })
 );
+
+// for secure your api
 app.use(require("helmet")());
 
 // ROUTES
-app.use("/api/v1", require("./api"));
+app.use("/", require("./api"));
 
 app.listen(process.env.PORT, () => {
   console.log(`App listening on port ${process.env.PORT}`);

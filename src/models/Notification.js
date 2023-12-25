@@ -1,12 +1,13 @@
-const mongoose = require('mongoose');
-
-const NotifSchema = new mongoose.Schema({
-    userId: {
-        type: String,
-        required: true
+const { Schema, model } = require('mongoose');
+const Account = require('./Account');
+const NotifSchema = new Schema({
+   user: {
+        type: Schema.Types.ObjectId,
+        ref: 'Account', 
     },
     type: {
         type: String,
+
         required: true
     },
     message: {
@@ -24,5 +25,5 @@ const NotifSchema = new mongoose.Schema({
 });
 
 // Export the model
-const Notification = mongoose.model('Notification', NotifSchema);
+const Notification = model('Notification', NotifSchema);
 module.exports = Notification;
