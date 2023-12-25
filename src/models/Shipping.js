@@ -1,24 +1,27 @@
-const mongoose = require('mongoose');
+const { Schema, model} = require('mongoose');
 
-const ShippingSchema = new mongoose.Schema({
+const validShippingTypes = ['air', 'sea', 'land', 'express']; // Add more types as needed
+
+const ShippingSchema = new Schema({
     type: {
         type: String,
-        required: true
+        required: true,
+        enum: validShippingTypes,
     },
     cost: {
         type: Number,
-        required: true
+        required: true,
     },
     estimatedDelivery: {
         type: String,
-        required: true
+        required: true,
     },
     regions: {
         type: Array,
-        default: true
-    }
+        default: [], // Set default to an empty array if needed
+    },
 });
 
 // Export the model
-const Shipping = mongoose.model('Shipping', ShippingSchema);
+const Shipping = model('Shipping', ShippingSchema);
 module.exports = Shipping;

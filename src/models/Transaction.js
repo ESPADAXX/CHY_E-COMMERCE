@@ -1,12 +1,15 @@
-const mongoose = require('mongoose');
-
+const {Schema,model} = require('mongoose');
+const Order = require('./Order')
+const User= require('./Account')
 const TransactionSchema = new mongoose.Schema({
-    orderId: {
-        type: String,
+    order: {
+        type: Schema.Types.ObjectId,
+        ref:'Order',
         required: true
     },
-    userId: {
-        type: String,
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     amount: {
@@ -28,5 +31,5 @@ const TransactionSchema = new mongoose.Schema({
 });
 
 // Export the model
-const Transaction = mongoose.model('Transaction', TransactionSchema);
+const Transaction = model('Transaction', TransactionSchema);
 module.exports = Transaction;
