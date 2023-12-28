@@ -25,7 +25,7 @@ const VariantSchema = new Schema({
 
 const ReviewSchema = new Schema({
     user: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Account', // Assuming 'Account' is the model name for the user schema
         required: true,
     },
@@ -114,6 +114,10 @@ const ProductSchema = new Schema({
         type: String,
         required: true,
     },
+    showFirst: {
+        type: Boolean,
+        default: false
+    }
 });
 
 // Export the model

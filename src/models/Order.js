@@ -18,7 +18,7 @@ const paymentMethodEnum = [
 
 const OrderSchema = new Schema({
   products: {
-    type: [Schema.Types.ObjectId],
+    type: [Product.schema],
     ref: "Product",
     default: [],
   },
@@ -41,7 +41,7 @@ const OrderSchema = new Schema({
     enum: paymentMethodEnum,
   },
   customer: {
-    type: Schema.Types.ObjectId,
+    type: Account.schema,
     ref: "Account",
   },
   discount: {

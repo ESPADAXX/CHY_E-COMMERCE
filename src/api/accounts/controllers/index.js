@@ -20,8 +20,9 @@ exports.update = async (req, res) => {
 
 // GET One
 exports.readOne = async (req, res) => {
-    console.log("Account Controller, read one ")
-    res.json('everything is okay')
+    let id = req.params.id;
+    const response = await readOne(Account, {_id:id});
+    res.status(201).json(response)
 };
 
 // DELETE ONE

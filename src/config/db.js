@@ -4,8 +4,7 @@ require("dotenv").config();
 
 const connectDB = async () => {
     console.log(process.env.DB_CONNECTION_STRING)
-  await connect(process.env.DB_CONNECTION_STRING, {
-  });
+  await connect(process.env.DB_CONNECTION_STRING);
 
   console.log(`MongoDB Connected successfully!`);
 };

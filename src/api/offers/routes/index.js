@@ -1,9 +1,8 @@
 const router = require("express").Router();
-const isAdmin = require("../../../middlewares/isAdmin");
 const { create, update, readAll, readOne, remove } = require("../controllers");
 
 // GET ALL
-router.get("/",isAdmin,readAll);
+router.get("/",readAll);
 // CREATE NEW
 router.post("/",create);
 // GET ONE

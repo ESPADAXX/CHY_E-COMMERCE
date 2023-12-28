@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { create, update, readAll, readOne, remove } = require("../controllers");
 
 // GET ALL
-router.route("/").get(readAll);
+router.route("/").get(readAll); 
 // CREATE NEW
 router.route("/").post(create);
 // GET ONE
