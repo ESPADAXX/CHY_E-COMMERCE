@@ -28,7 +28,6 @@ exports.register = async (req, res) => {
         fullName,
         email,
         password: hashedPassword,
-        isVerified: false,
         verificationCode,
       });
 

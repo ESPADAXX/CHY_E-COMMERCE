@@ -61,7 +61,8 @@ exports.update = async (req, res) => {
 // GET ONE
 exports.readOne = async (req, res) => {
     try {
-        const response = await readOne(Order, req.params.id);
+        const data ={_id:req.params.id}
+        const response = await readOne(Order, data);
         handleResponse(res, response);
     } catch (error) {
         res.status(500).json({

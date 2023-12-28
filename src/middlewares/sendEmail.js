@@ -2,6 +2,7 @@
 const nodemailer = require('nodemailer');
 const ejs = require('ejs');
 const fs = require('fs').promises;
+require("dotenv").config();
 const loadTemplate = async (templatePath, code) => {
   const template = await fs.readFile(templatePath, 'utf-8');
   return ejs.render(template,{code});
@@ -11,11 +12,11 @@ exports.sendEmail = async (req, res) => {
 
     const emailContent = await loadTemplate(req.path, req.code );
     const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "houssamtkd03@gmail.com",
-    pass: "nckutzhydzwovddj"
-  },
+      service: "gmail",
+      auth: {
+        user: "houssamtkd03@gmail.com",
+        pass: process.env.PASSWORD_EMAIL_APP
+      },
     });
 
     const mailOptions = {

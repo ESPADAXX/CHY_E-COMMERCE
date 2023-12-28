@@ -21,7 +21,7 @@ exports.verifyForEmail = async (req, res) => {
       {
         id: user._id,
         fullName: user.fullName,
-        role: user.role,
+        role: user.role
       },
       process.env.JWT_KEY_SECRET,
       {

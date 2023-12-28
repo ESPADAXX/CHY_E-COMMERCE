@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const Account = require('./Account');
 const NotifSchema = new Schema({
    user: {
-        type: Schema.Types.ObjectId,
+        type: Account.schema,
         ref: 'Account', 
     },
     type: {

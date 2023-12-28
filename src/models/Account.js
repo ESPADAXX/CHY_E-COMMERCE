@@ -17,7 +17,6 @@ const AccountSchema = new Schema({
     phoneNumber: {
         type: String,
         required: false,
-        unique : true,
     },
     address: {
         type: String,
