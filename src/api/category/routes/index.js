@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const isAdmin = require("../../../middlewares/isAdmin");
 const { create, updateOne, readAll, readOne, remove } = require("../controllers");
 
 // GET ALL

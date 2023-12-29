@@ -8,7 +8,7 @@ exports.create = async (Type, data) => {
         response.status = 201;
         response.id = newType._id;
         response.success = true;
-        response.message = `document ${newType._id} created successfully`;
+        response.message = `${Type.modelName} created successfully`;
       })
       .catch((err) => {
         console.error(err);
@@ -42,7 +42,7 @@ exports.create = async (Type, data) => {
     if (result) {
       response.status = 201;
       response.success = true;
-      response.message = "Document updated";
+      response.message = `${Type.modelName} updated`;
     } else {
       response.status = 400;
       response.success = false;
@@ -84,7 +84,7 @@ exports.create = async (Type, data) => {
     if (result) {
       response.status = 200;
       response.success=true
-      response.message = "Document deleted";
+      response.message = `${Type.modelName} deleted`;
     } else {
       response.status = 400;
       response.success = false;
