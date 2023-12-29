@@ -1,15 +1,16 @@
 const router = require("express").Router();
+const isAdmin = require("../../../middlewares/isAdmin");
 const { create, update, readAll, readOne, remove } = require("../controllers");
 
 // GET ALL
-router.route("/").get(readAll);
+router.get("/",readAll);
 // CREATE NEW
-router.route("/").post(create);
+router.post("/",create);
 // GET ONE
-router.route("/:id").get(readOne);
+router.get("/:id",readOne);
 // UPDATE ONE
-router.route("/:id").put(update);
+router.put("/:id",update);
 // DELETE ONE
-router.route("/:id").delete(remove);
+router.delete("/:id",remove);
 
 module.exports = router;

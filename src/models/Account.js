@@ -1,5 +1,5 @@
 const {Schema, model} = require('mongoose');
-
+const Roles=['client','moderator','admin']
 const AccountSchema = new Schema({
     fullName: {
         type: String,
@@ -17,7 +17,6 @@ const AccountSchema = new Schema({
     phoneNumber: {
         type: String,
         required: false,
-        unique : true,
     },
     address: {
         type: String,
@@ -28,9 +27,21 @@ const AccountSchema = new Schema({
         default: false,
         required : false
     },
+    isVerified: {
+        type: Boolean,
+        default: false
+        },
+    verificationCode: {
+        type: String
+    },
     wishlist: {
         type: Array,
         required : false
+    },
+    role: {
+        type: String,
+        enum: Roles,
+        default:Roles[0]
     },
     createdAt: {
         type: Date,
@@ -41,6 +52,7 @@ const AccountSchema = new Schema({
         type: Date,
         required : false
     }
+
 });
 
 // Export the model

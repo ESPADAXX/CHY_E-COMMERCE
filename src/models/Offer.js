@@ -29,7 +29,7 @@ const OfferSchema = new Schema({
         required: true
     },
     applicableProducts: {
-        type: Schema.Types.ObjectId,
+        type: [Product.schema],
         ref: 'Product',
         required: true
     },
