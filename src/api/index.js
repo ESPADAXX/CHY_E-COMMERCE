@@ -2,8 +2,8 @@ const app = require("express")();
 const accounts = require("./accounts/routes");
 const products = require('./products/routes')
 const offers = require('./offers/routes');
-const orders = require('./order/routes');
-const notifications = require('./notification/routes');
+const orders = require('./orders/routes');
+const notifications = require('./notifications/routes');
 const auth=require('./authentication/routes')
 app.use("/accounts", accounts);
 app.use("/products", products);

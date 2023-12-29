@@ -63,7 +63,7 @@ exports.register = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-  let { email, password } = req.body;
+  let { email, password,confrimPassword } = req.body;
   try {
     const user = await readOne(Account, { email });
     if (!user.data) {

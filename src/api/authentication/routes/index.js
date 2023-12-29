@@ -7,7 +7,7 @@ const {verifyPassword}= require('../middelwares/verifyForPassword')
 router.post("/register", validation, handleValidationErrors, register);
 router.post("/login", validation, handleValidationErrors, login);
 router.post("/verify", verifyForEmail)
-router.get("/resset-password", ressetPassword)
+router.post("/resset-password", ressetPassword)
 router.post("/verifyPassword",verifyPassword)
 module.exports = router;
 
