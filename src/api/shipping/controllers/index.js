@@ -1,11 +1,11 @@
 const { create, readAll, readOne, updateOne, deleteOne } = require('../../../middlewares/crudPattern');
-const Product = require('../../../models/Product')
+const Shipping = require('../../../models/Shipping')
 
 
 // CREATE NEW
 exports.create = async (req, res) => {
     try {
-        const response = await create(Product, req.body);
+        const response = await create(Shipping, req.body);
         if (response.success === false) {
             return res.status(400).json({
                 status: 400,
@@ -27,15 +27,15 @@ exports.create = async (req, res) => {
 // GET ALL
 exports.readAll = async (req, res) => {
     try {
-        const products = await readAll(Product);
-        if (products.success === false) {
+        const shippings = await readAll(Shipping);
+        if (shippings.success === false) {
             return res.status(400).json({
                 status: 400,
                 success: false,
-                message: products.message || "Bad Request",
+                message: shippings.message || "Bad Request",
             });
         }
-        res.status(products.status).json(products);
+        res.status(shippings.status).json(shippings);
     } catch (error) {
         res.status(500).json({
             status: 500,
@@ -49,7 +49,7 @@ exports.readAll = async (req, res) => {
 // UPDATE ONE
 exports.updateOne = async (req, res) => {
     try {
-        const response = await updateOne(Product, req.params.id, req.body);
+        const response = await updateOne(Shipping, req.params.id, req.body);
         if (response.success === false) {
             return res.status(400).json({
                 status: 400,
@@ -71,7 +71,7 @@ exports.updateOne = async (req, res) => {
 // GET ONE
 exports.readOne = async (req, res) => {
     try {
-        const response = await readOne(Product, { _id:req.params.id });
+        const response = await readOne(Shipping, { _id:req.params.id });
         if (response.success === false) {
             return res.status(400).json({
                 status: 400,
@@ -93,7 +93,7 @@ exports.readOne = async (req, res) => {
 // DELETE ONE
 exports.remove = async (req, res) => {
     try {
-        const response = await deleteOne(Product, req.params.id);
+        const response = await deleteOne(Shipping, req.params.id);
         if (response.success === false) {
             return res.status(400).json({
                 status: 400,

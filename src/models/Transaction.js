@@ -1,7 +1,7 @@
 const {Schema,model} = require('mongoose');
 const Order = require('./Order')
 const User= require('./Account')
-const TransactionSchema = new mongoose.Schema({
+const TransactionSchema = Schema({
     order: {
         type: Schema.Types.ObjectId,
         ref:'Order',
