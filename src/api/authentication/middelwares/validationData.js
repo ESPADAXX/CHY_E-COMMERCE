@@ -9,6 +9,14 @@ const validation = [
     .isEmail()
     .withMessage('Invalid email address'),
   body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
+  body('confirmPassword')
+    .optional()
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error('Passwords do not match');
+      }
+      return true;
+    }),
   body('phoneNumber').optional().isMobilePhone().withMessage('Invalid phone number'),
 ];
 

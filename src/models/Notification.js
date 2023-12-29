@@ -7,7 +7,6 @@ const NotifSchema = new Schema({
     },
     type: {
         type: String,
-
         required: true
     },
     message: {

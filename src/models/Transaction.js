@@ -3,12 +3,12 @@ const Order = require('./Order')
 const User= require('./Account')
 const TransactionSchema = Schema({
     order: {
-        type: Schema.Types.ObjectId,
+        type: Order.schema,
         ref:'Order',
         required: true
     },
     user: {
-        type: Schema.Types.ObjectId,
+        type: User.schema,
         ref: 'User',
         required: true
     },
