@@ -1,6 +1,6 @@
 const { body, validationResult } = require('express-validator');
 
-const validation = [
+const RegisterValidation = [
   body('fullName').trim().isLength({ min: 1 }).withMessage('Full name is required'),
   body('email')
     .trim()
@@ -10,7 +10,6 @@ const validation = [
     .withMessage('Invalid email address'),
   body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
   body('confirmPassword')
-    .optional()
     .custom((value, { req }) => {
       if (value !== req.body.password) {
         throw new Error('Passwords do not match');
@@ -20,7 +19,7 @@ const validation = [
   body('phoneNumber').optional().isMobilePhone().withMessage('Invalid phone number'),
 ];
 
-const handleValidationErrors = (req, res, next) => {
+const handleRegisterValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   
   if (!errors.isEmpty()) {
@@ -28,7 +27,6 @@ const handleValidationErrors = (req, res, next) => {
       field: error.path,
       message: error.msg,
     }));
-
     return res.status(400).json({ success: false, errors: errorMessages });
   }
 
@@ -36,4 +34,4 @@ const handleValidationErrors = (req, res, next) => {
   next();
 };
 
-module.exports = { validation, handleValidationErrors };
+module.exports = { RegisterValidation, handleRegisterValidationErrors };

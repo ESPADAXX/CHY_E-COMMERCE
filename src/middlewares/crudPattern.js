@@ -11,7 +11,6 @@ exports.create = async (Type, data) => {
         response.message = `${Type.modelName} created successfully`;
       })
       .catch((err) => {
-        console.error(err);
         response.status = 500;
         response.success = false;
         response.message = "something went wrong";

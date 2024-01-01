@@ -3,6 +3,7 @@ const Account = require("../../../models/Account");
 const bcrypt = require("bcrypt");
 const crypto = require('crypto');
 const jwt = require("jsonwebtoken");
+const session=require('express-session')
 const { create, readOne, updateOne } = require("../../../middlewares/crudPattern");
 const { sendEmail } = require("../../../middlewares/sendEmail");
 require("dotenv").config();
@@ -13,7 +14,7 @@ const generateVerificationCode = () => {
 };
 
 exports.register = async (req, res) => {
-  const { email, fullName, password ,confrimPassword } = req.body;
+  const { email, fullName, password ,confirmPassword } = req.body;
   try {
     const existingUser = await readOne(Account, { email });
     if (existingUser.success) {
@@ -33,17 +34,13 @@ exports.register = async (req, res) => {
 
       const successMessage = "User registered successfully. Verification email sent.";
       const path = './src/view/verificationForEmail.ejs';
-       await sendEmail({
+      const response= await sendEmail({
         email,
         successMessage,
         code: verificationCode,
         path
       }, res);
-
-      res.status(202).json({
-        success: true,
-        message: "Registration successful. Check your email for verification.",
-      });
+      res.status(201).json(response);
     }
   } catch (err) {
     if (err.name === "MongoError" && err.code === 11000) {
@@ -85,28 +82,13 @@ exports.login = async (req, res) => {
 
     const successMessage = "Verification email sent for login.";
     const path = './src/view/verificationForEmail.ejs';
-    await sendEmail({
-      email,
-      successMessage,
-      code: verificationCode,
-      path
-    }, res);
-
-    const token = jwt.sign(
-      {
-        id: user.data._id,
-        fullName: user.data.fullName,
-        role: user.data.role,
-      },
-      process.env.JWT_KEY_SECRET,
-      {
-        expiresIn: "1w",
-      }
-    );
-    return res.status(200).send({
-      success: true,
-      token: token,
-    });
+    const response= await sendEmail({
+        email,
+        successMessage,
+        code: verificationCode,
+        path
+      }, res);
+      res.status(201).json(response);
   } catch (error) {
     console.error(error);
     return res
@@ -115,19 +97,42 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.ressetPassword = (req, res) => {
+exports.ressetPassword =async (req, res) => {
   const { email } = req.body;
 
   const verificationCode = generateVerificationCode();
 
-  Account.findOneAndUpdate({ email }, { $set: { verificationCode } });
+  await Account.findOneAndUpdate({ email }, { $set: { verificationCode } });
 
   const successMessage = "Verification email sent for password reset.";
   const path = './src/view/verificationForPassword.ejs';
-  sendEmail({
-    email,
-    successMessage,
-    code: verificationCode,
-    path
-  }, res);
+  const response= await sendEmail({
+        email,
+        successMessage,
+        code: verificationCode,
+        path
+      }, res);
+      res.status(201).json(response);
+};
+exports.logout = (req, res) => {
+  // Check if a valid token is present in the session
+  if (!req.session.token) {
+    return res.status(401).send({
+      success: false,
+      message: 'Unauthorized. No valid session.'
+    });
+  }
+
+  // Destroy the session
+  req.session.destroy((err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send({ success: false, message: "Internal server error" });
+    }
+
+    return res.status(200).send({
+      success: true,
+      message: 'Logged out successfully'
+    });
+  });
 };

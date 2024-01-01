@@ -1,10 +1,16 @@
-const Account = require('../../../models/Account')
-const jwt = require("jsonwebtoken")
+const Account = require('../../../models/Account');
+const jwt = require("jsonwebtoken");
+const session = require('express-session');
+
 exports.verifyForEmail = async (req, res) => {
-     const { code } = req.body;
+  const { code } = req.body;
 
   try {
-    const user = await Account.findOne({ verificationCode: code });
+    const user = await Account.findOneAndUpdate(
+      { verificationCode: code, isVerified: false },
+      { $set: { isVerified: true, verificationCode: undefined } },
+      { new: true }
+    );
 
     if (!user) {
       return res.status(404).json({
@@ -12,12 +18,8 @@ exports.verifyForEmail = async (req, res) => {
         message: 'User not found or already verified'
       });
     }
-    // Mark the user as verified and clear the verification code
-    user.isVerified = true;
-    user.verificationCode = undefined;
-    await user.save();
 
-      const token = jwt.sign(
+    const token = jwt.sign(
       {
         id: user._id,
         fullName: user.fullName,
@@ -28,12 +30,17 @@ exports.verifyForEmail = async (req, res) => {
         expiresIn: "1w",
       }
     );
-      return res.status(201).send({
-        success: true,
-        token,
-        message: "email verified successfully",
-      });
-    
+
+    req.session.userId = user._id;
+    req.session.token = token;
+    req.session.loggedin = true;
+    req.session.role = user.role;
+    await req.session.save();
+    return res.status(201).send({
+      success: true,
+      token,
+      message: "Email verified successfully",
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({
@@ -41,4 +48,4 @@ exports.verifyForEmail = async (req, res) => {
       message: 'Server Error'
     });
   }
-}
+};
