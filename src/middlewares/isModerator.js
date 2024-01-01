@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const isAdmin = (req, res, next) => {
+exports.isModerator = (req, res, next) => {
   // Extract the token from the request headers or wherever it is stored
   const authorizationHeader = req.headers.authorization;
 
@@ -21,14 +21,13 @@ const isAdmin = (req, res, next) => {
         }
 
         // Check if the user has the "admin" role
-        if (decoded && decoded.role === "admin") {
+          if (decoded && (decoded.role === "moderator"||decoded.role==="admin")) {
           req.user = decoded;
           next();
-        } else {
-          // User is not an admin, send a forbidden response
+        }  else {
           return res.status(403).json({
             success: false,
-            message: "Access forbidden. Admin privileges required.",
+            message: "Access forbidden. Moderator privileges required.",
           });
         }
       });
@@ -41,5 +40,3 @@ const isAdmin = (req, res, next) => {
     console.log("No Authorization header provided");
   }
 };
-
-module.exports = isAdmin;
