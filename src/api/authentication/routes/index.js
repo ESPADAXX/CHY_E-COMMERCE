@@ -6,23 +6,12 @@ const { verifyForEmail } = require('../middelwares/verifyForEmail')
 const { ressetPassword } = require('../controllers/index')
 const {verifyPassword}= require('../middelwares/verifyForPassword');
 const { isAuthenticated } = require('../../../middlewares/isAuthenticate');
+
 router.post("/register", RegisterValidation, handleRegisterValidationErrors, register);
 router.post("/login", loginValidation, handleLoginValidationErrors, login);
 router.post("/logout",isAuthenticated,logout)
 router.post("/verify", verifyForEmail)
 router.post("/resset-password", ressetPassword)
 router.post("/verifyPassword",verifyPassword)
-module.exports = router;
 
-// isMod = (req,res,next) => {
-//     if (req.body.role === 'mod') {
-//     next()
-// } else {
-//     isAdmin(req,res,next)
-// }}
-// isAdmin = (req,res,next) => {
-//     if (!req.body.role === 'admin') {
-//         return false
-//     }
-//     next()
-// }
+module.exports = router;

@@ -6,6 +6,7 @@ const Product = require('../../../models/Product')
 exports.create = async (req, res) => {
     try {
         const response = await create(Product, req.body);
+        console.log(response)
         if (response.success === false) {
             return res.status(400).json({
                 status: 400,
