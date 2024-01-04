@@ -12,7 +12,7 @@ const RegisterValidation = [
   body('confirmPassword')
     .custom((value, { req }) => {
       if (value !== req.body.password) {
-        throw new Error('Passwords do not match');
+        throw new Error('Password do not match');
       }
       return true;
     }),

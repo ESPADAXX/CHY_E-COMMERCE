@@ -64,15 +64,11 @@ exports.create = async (Type, data) => {
         response.message = "No such document";
       }
     } catch (err) {
-      if (err.kind === "ObjectId") {
-        response.status = 400;
-        response.success=true
-        response.message = "Bad request";
-      } else {
+      
         response.status = 500;
         response.success = false;
         response.message = "Something went wrong";
-      }
+      
     }
     return { ...response };
   };

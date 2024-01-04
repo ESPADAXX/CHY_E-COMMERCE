@@ -9,7 +9,10 @@ require("./config/db")();
 
 // SERVER CONFIG
 const app = express();
-
+app.use((req, res, next) => {
+  res.setHeader('Content-Security-Policy', 'default-src *');
+  next();
+});
 // Rate limiting middleware
 const limiter = rateLimit({
   windowMs:15* 60 * 1000, // 15 minutes
@@ -23,7 +26,7 @@ app.use(
   session({
     secret: process.env.SECURE_KEY_SESSION,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: { secure: false },
   })
 );

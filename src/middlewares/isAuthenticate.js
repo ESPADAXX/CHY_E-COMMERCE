@@ -1,4 +1,4 @@
-exports.isAuthenticated = (req, res, next) => {
+const isAuthenticated = (req, res, next) => {
   // Check if the user is authenticated based on the presence of a token
   const authorizationHeader = req.headers.authorization;
   const parts = authorizationHeader.split(" ");
@@ -12,9 +12,6 @@ exports.isAuthenticated = (req, res, next) => {
       });
     }
       try {
-      // Verify the token
-      // const decoded = jwt.verify(token, process.env.JWT_KEY_SECRET);
-
       // Check if the decoded token's fullname matches the one saved in the session
       if (token === req.session.token) {
         // User is authenticated
@@ -38,3 +35,4 @@ exports.isAuthenticated = (req, res, next) => {
     console.log("No Authorization header provided");
   }
 };
+module.exports=isAuthenticated

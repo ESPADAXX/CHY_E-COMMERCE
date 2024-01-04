@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const isAdmin = require("../../../middlewares/isAdmin");
+const  isAuthenticated  = require("../../../middlewares/isAuthenticate");
 const { create, updateOne, readAll, readOne, remove } = require("../controllers");
 
 // GET ALL

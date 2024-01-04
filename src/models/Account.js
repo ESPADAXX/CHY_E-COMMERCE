@@ -12,7 +12,6 @@ const AccountSchema = new Schema({
     },
     password: {
         type: String,
-        required: true
     },
     phoneNumber: {
         type: String,
@@ -42,6 +41,12 @@ const AccountSchema = new Schema({
         type: String,
         enum: Roles,
         default:Roles[0]
+    },
+    googleId: {
+        type:String
+    },
+    accessToken:{
+        type:String
     },
     createdAt: {
         type: Date,

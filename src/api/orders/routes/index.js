@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { isAuthenticated } = require("../../../middlewares/isAuthenticate");
+const  isAuthenticated  = require("../../../middlewares/isAuthenticate");
 const { isModerator } = require("../../../middlewares/isModerator");
 const { create, update, readAll, readOne, remove } = require("../controllers");
 

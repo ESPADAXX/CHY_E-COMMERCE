@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
+const { readOne } = require("./crudPattern");
+const Account = require("../models/Account");
 
-exports.isModerator = (req, res, next) => {
+exports.isModerator = async (req, res, next) => {
   // Extract the token from the request headers or wherever it is stored
   const authorizationHeader = req.headers.authorization;
 
@@ -11,7 +13,7 @@ exports.isModerator = (req, res, next) => {
     if (parts.length === 2 && parts[0] === "Bearer") {
       const token = parts[1];
       // Verify and decode the token
-      jwt.verify(token, process.env.JWT_KEY_SECRET, (err, decoded) => {
+      jwt.verify(token, process.env.JWT_KEY_SECRET, async (err, decoded) => {
         if (err) {
           // Token verification failed, send forbidden response
           return res.status(403).json({
@@ -19,9 +21,9 @@ exports.isModerator = (req, res, next) => {
             message: "Access forbidden. Invalid token.",
           });
         }
-
+        const user = await readOne(Account, { _id: decoded.id })
         // Check if the user has the "admin" role
-          if (decoded && (decoded.role === "moderator"||decoded.role==="admin")) {
+          if (user && (user.data.role === "moderator"||user.data.role==="admin")) {
           req.user = decoded;
           next();
         }  else {
