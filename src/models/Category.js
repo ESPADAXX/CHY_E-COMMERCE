@@ -13,6 +13,14 @@ const CategorySchema = new Schema({
         type: Boolean,
         default: true
     },
+    thumbnail: {
+        type: String
+
+    },
+    images: {
+        type: [String]
+
+    },
     createdAt: {
         type: Date,
         default: Date.now

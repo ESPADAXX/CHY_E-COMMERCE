@@ -1,12 +1,12 @@
 // Create
 exports.create = async (Type, data) => {
-    let response = {};
+  let response = {};
     var newType = new Type({ ...data });
     await newType
       .save()
       .then(() => {
         response.status = 201;
-        response.id = newType._id;
+        response.id = newType._id.toString();
         response.success = true;
         response.message = `${Type.modelName} created successfully`;
       })
@@ -35,9 +35,7 @@ exports.create = async (Type, data) => {
   // Update
   exports.updateOne = async (Type, id, data) => {
     let response = {};
-    console.log(data)
     const result = await Type.findByIdAndUpdate({ _id: id }, { $set: { ...data } },{new:true});
-    console.log(result)
     if (result) {
       response.status = 201;
       response.success = true;

@@ -5,7 +5,7 @@ const isAuthenticated = require("../../../middlewares/isAuthenticate");
 // // GET ALL
 router.get("/",readAll); 
 // CREATE NEW
-router.post("/",isAuthenticated,isModerator,create);
+router.post("/",create);
 // GET ONE
 router.get("/:id", readOne);
 // UPDATE ONE

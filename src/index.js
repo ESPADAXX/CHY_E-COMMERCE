@@ -5,14 +5,18 @@ const cors = require("cors");
 const session = require("express-session");
 const rateLimit = require("express-rate-limit"); 
 const helmet = require("helmet")
+const bodyParser=require('body-parser')
 require("./config/db")();
 
 // SERVER CONFIG
 const app = express();
 app.use((req, res, next) => {
-  res.setHeader('Content-Security-Policy', 'default-src *');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
   next();
 });
+app.use(bodyParser.json());
+// in latest body-parser use like below.
+app.use(bodyParser.urlencoded({ extended: true }));
 // Rate limiting middleware
 const limiter = rateLimit({
   windowMs:15* 60 * 1000, // 15 minutes
