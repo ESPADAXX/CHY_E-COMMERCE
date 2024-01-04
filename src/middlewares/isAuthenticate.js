@@ -1,6 +1,10 @@
 const isAuthenticated = (req, res, next) => {
   // Check if the user is authenticated based on the presence of a token
   const authorizationHeader = req.headers.authorization;
+  if (!authorizationHeader || !authorizationHeader.startsWith('Bearer '
+  )) return res.status(401).json({
+    error: 'You must be logged in to view this resource.'
+    });
   const parts = authorizationHeader.split(" ");
   if (parts.length === 2 && parts[0] === "Bearer") {
     const token = parts[1];
