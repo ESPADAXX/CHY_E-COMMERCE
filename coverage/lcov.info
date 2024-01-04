@@ -261,7 +261,7 @@ BRF:16
 BRH:0
 end_of_record
 TN:
-SF:src\api\authentication\middelwares\validationDataLogin.js
+SF:src\api\authentication\middlewares\validationDataLogin.js
 FN:11,(anonymous_0)
 FN:18,(anonymous_1)
 FN:21,(anonymous_2)
@@ -292,7 +292,7 @@ BRF:2
 BRH:0
 end_of_record
 TN:
-SF:src\api\authentication\middelwares\validationDataRegister.js
+SF:src\api\authentication\middlewares\validationDataRegister.js
 FN:13,(anonymous_0)
 FN:22,(anonymous_1)
 FN:26,(anonymous_2)
@@ -323,7 +323,7 @@ BRF:4
 BRH:2
 end_of_record
 TN:
-SF:src\api\authentication\middelwares\verifyForEmail.js
+SF:src\api\authentication\middlewares\verifyForEmail.js
 FN:5,(anonymous_0)
 FNF:1
 FNH:0
@@ -354,7 +354,7 @@ BRF:2
 BRH:0
 end_of_record
 TN:
-SF:src\api\authentication\middelwares\verifyForPassword.js
+SF:src\api\authentication\middlewares\verifyForPassword.js
 FN:3,(anonymous_0)
 FNF:1
 FNH:0

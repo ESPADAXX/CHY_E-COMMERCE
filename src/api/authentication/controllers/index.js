@@ -113,7 +113,7 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.ressetPassword = async (req, res) => {
+exports.resetPassword = async (req, res) => {
   const { email } = req.body;
 
   const verificationCode = generateVerificationCode();
@@ -165,12 +165,12 @@ exports.oAuth2 = () => {
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: `${process.env.URL}/auth/google/callback`,
       },
-      async ( accessToken, refreshToken, profile, done) => {
+      async (accessToken, refreshToken, profile, done) => {
         try {
           // Check if the user already exists in your database
           const user = await readOne(Account, { googleId: profile.id });
           if (user.success) {
-            user.accessToken=accessToken
+            user.accessToken = accessToken;
             await user.data.save();
             return done(null, user);
           } else {
@@ -182,8 +182,7 @@ exports.oAuth2 = () => {
             });
 
             if (newUser.success) {
-              
-              newUser.accessToken=accessToken
+              newUser.accessToken = accessToken;
               return done(null, newUser);
             } else {
               // Error creating user

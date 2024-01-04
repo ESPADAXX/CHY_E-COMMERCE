@@ -179,9 +179,9 @@
         <line num="141" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="src.api.authentication.middelwares">
+    <package name="src.api.authentication.middlewares">
       <metrics statements="56" coveredstatements="22" conditionals="10" coveredconditionals="2" methods="9" coveredmethods="3"/>
-      <file name="validationDataLogin.js" path="C:\Users\houss\OneDrive\Bureau\ynov\CHY_PROJECT\CHY_SERVER\src\api\authentication\middelwares\validationDataLogin.js">
+      <file name="validationDataLogin.js" path="C:\Users\houss\OneDrive\Bureau\ynov\CHY_PROJECT\CHY_SERVER\src\api\authentication\middlewares\validationDataLogin.js">
         <metrics statements="12" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -196,7 +196,7 @@
         <line num="34" count="0" type="stmt"/>
         <line num="37" count="1" type="stmt"/>
       </file>
-      <file name="validationDataRegister.js" path="C:\Users\houss\OneDrive\Bureau\ynov\CHY_PROJECT\CHY_SERVER\src\api\authentication\middelwares\validationDataRegister.js">
+      <file name="validationDataRegister.js" path="C:\Users\houss\OneDrive\Bureau\ynov\CHY_PROJECT\CHY_SERVER\src\api\authentication\middlewares\validationDataRegister.js">
         <metrics statements="12" coveredstatements="10" conditionals="4" coveredconditionals="2" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -211,7 +211,7 @@
         <line num="34" count="0" type="stmt"/>
         <line num="37" count="1" type="stmt"/>
       </file>
-      <file name="verifyForEmail.js" path="C:\Users\houss\OneDrive\Bureau\ynov\CHY_PROJECT\CHY_SERVER\src\api\authentication\middelwares\verifyForEmail.js">
+      <file name="verifyForEmail.js" path="C:\Users\houss\OneDrive\Bureau\ynov\CHY_PROJECT\CHY_SERVER\src\api\authentication\middlewares\verifyForEmail.js">
         <metrics statements="18" coveredstatements="4" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -232,7 +232,7 @@
         <line num="45" count="0" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
       </file>
-      <file name="verifyForPassword.js" path="C:\Users\houss\OneDrive\Bureau\ynov\CHY_PROJECT\CHY_SERVER\src\api\authentication\middelwares\verifyForPassword.js">
+      <file name="verifyForPassword.js" path="C:\Users\houss\OneDrive\Bureau\ynov\CHY_PROJECT\CHY_SERVER\src\api\authentication\middlewares\verifyForPassword.js">
         <metrics statements="14" coveredstatements="3" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>

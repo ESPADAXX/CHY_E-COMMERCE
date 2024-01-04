@@ -10,6 +10,12 @@ git pull
 git checkout (branche-cible)
 git merge (ma-branche)
 
+supprimer les commandes non commitées : 
+git clean -fdX
+
+puller une autre branche :
+git pull origin (branche de laquelle je veux puller)
+
 ### COMMANDES GIT :
 
 CLONAGE DU DÉPÔT: git clone https://github.com/ESPADAXX/CHY_E-COMMERCE_API.git
