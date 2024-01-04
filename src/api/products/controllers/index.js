@@ -26,6 +26,7 @@ exports.create = async (req, res) => {
 
 // GET ALL
 exports.readAll = async (req, res) => {
+    
     try {
         const products = await readAll(Product);
         if (products.success === false) {

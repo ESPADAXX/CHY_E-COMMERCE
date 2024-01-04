@@ -1,25 +1,33 @@
 const router = require('express').Router();
-const { register, login } = require('../controllers')
-const { validation, handleValidationErrors } = require('../middelwares/validationData');
+const { register, login,logout } = require('../controllers')
+const { RegisterValidation, handleRegisterValidationErrors } = require('../middelwares/validationDataRegister');
+const { loginValidation, handleLoginValidationErrors } = require('../middelwares/validationDataLogin');
 const { verifyForEmail } = require('../middelwares/verifyForEmail')
 const { ressetPassword } = require('../controllers/index')
-const {verifyPassword}= require('../middelwares/verifyForPassword')
-router.post("/register", validation, handleValidationErrors, register);
-router.post("/login", validation, handleValidationErrors, login);
+const {verifyPassword}= require('../middelwares/verifyForPassword');
+const isAuthenticated  = require('../../../middlewares/isAuthenticate');
+const passport = require('passport')
+const { oAuth2 } = require('../controllers'); // Import the oAuth2 function
+
+
+oAuth2();
+router.post("/register", RegisterValidation, handleRegisterValidationErrors, register);
+router.post("/login", loginValidation, handleLoginValidationErrors, login);
+router.post("/logout",isAuthenticated,logout)
 router.post("/verify", verifyForEmail)
 router.post("/resset-password", ressetPassword)
-router.post("/verifyPassword",verifyPassword)
+router.post("/verifyPassword", verifyPassword)
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/google/callback',
+  passport.authenticate('google',{ failureRedirect: '/' }),
+  (req, res) => {
+    // Successful authentication, send the response
+    res.status(201).json({
+      success: true,
+      message: "Authentication successful",
+      accessToken: req.user.accessToken,
+      
+    });
+  }
+);
 module.exports = router;
-
-// isMod = (req,res,next) => {
-//     if (req.body.role === 'mod') {
-//     next()
-// } else {
-//     isAdmin(req,res,next)
-// }}
-// isAdmin = (req,res,next) => {
-//     if (!req.body.role === 'admin') {
-//         return false
-//     }
-//     next()
-// }

@@ -1,15 +1,17 @@
 const router = require("express").Router();
+const  isAuthenticated  = require("../../../middlewares/isAuthenticate");
+const { isModerator } = require("../../../middlewares/isModerator");
 const { create, update, readAll, readOne, remove } = require("../controllers");
 
 // GET ALL
-router.get("/",readAll);
+router.get("/",isAuthenticated,isModerator,readAll);
 // CREATE NEW
-router.post("/",create);
+router.post("/",isAuthenticated,create);
 // GET ONE
-router.get("/:id",readOne);
+router.get("/:id",isAuthenticated,readOne);
 // UPDATE ONE
-router.put("/:id",update);
+router.put("/:id",isAuthenticated,update);
 // DELETE ONE
-router.delete("/:id",remove);
+router.delete("/:id",isAuthenticated,remove);
 
 module.exports = router;
