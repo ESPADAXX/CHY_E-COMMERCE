@@ -40,7 +40,7 @@ exports.create = async (req, res) => {
       const updatedProduct = await updateOne(Product, response.id, {
         thumbnail,
       });
-
+ 
       if (updatedProduct.success === false) {
         return res.status(400).json({
           status: 400,

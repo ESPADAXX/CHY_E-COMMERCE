@@ -9,3 +9,4 @@ const uploadToFbStorage = async (type,productId, folder, file) => {
     return getDownloadURL(storageRef);
 };
 module.exports = { uploadToFbStorage };
+ 
