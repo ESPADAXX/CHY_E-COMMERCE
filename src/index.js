@@ -1,10 +1,16 @@
 // REQUIREMENTS
 require("dotenv").config();
 const express = require("express");
+
 const cors = require("cors");
+
 const session = require("express-session");
 const rateLimit = require("express-rate-limit"); 
+
 const helmet = require("helmet")
+
+
+
 require("./config/db")();
 
 // SERVER CONFIG
