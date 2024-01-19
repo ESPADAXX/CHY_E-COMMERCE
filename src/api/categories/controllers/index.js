@@ -12,7 +12,7 @@ const {
 } = require("../../../middlewares/firebaseStorage");
 // CREATE NEW
 exports.create = async (req, res) => {
-    try {
+  try {
         req.body=JSON.parse(JSON.stringify(req.body))
         req.body.isActive = Boolean(req.body.isActive)
       // Create the product in the database

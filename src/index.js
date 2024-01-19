@@ -10,17 +10,13 @@ require("./config/db")();
 
 // SERVER CONFIG
 const app = express();
-app.use((req, res, next) => {
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  next();
-});
 app.use(bodyParser.json());
 // in latest body-parser use like below.
 app.use(bodyParser.urlencoded({ extended: true }));
 // Rate limiting middleware
 const limiter = rateLimit({
   windowMs:15* 60 * 1000, // 15 minutes
-  max: 50, // limit each IP to 50 requests per windowMs
+  max: 2, // limit each IP to 50 requests per windowMs
 });
 
 app.use(limiter); // Apply the rate limiter
@@ -38,7 +34,7 @@ app.use(
   cors({
     credentials: false,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3100"],
   })
 );
 
@@ -47,10 +43,10 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        scriptSrc: ["'self'"],
+        scriptSrc: ["'self'","http://localhost:3100"],
         styleSrc: ["'self'"],
         imgSrc: ["'self'"],
-        connectSrc: ["'self'","http://localhost:3000"], // Add localhost:3000
+        connectSrc: ["'self'","http://localhost:3100"], // Add localhost:3000
         fontSrc: ["'self'"],
       },
     },

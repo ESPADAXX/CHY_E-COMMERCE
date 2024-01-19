@@ -3,7 +3,7 @@ require("dotenv").config();
 // Database Connection
 
 const connectDB = async () => {
-  await connect(process.env.DB_CONNECTION_STRING).then(() => {  
+  await connect(process.env.DB_CONNECTION_TESTING).then(() => {  
     console.log(`MongoDB Connected successfully 🍃`);
   });
 };

@@ -20,6 +20,7 @@ const generateVerificationCode = () => {
 
 exports.register = async (req, res) => {
   const { email, fullName, password, confirmPassword } = req.body;
+  console.log(fullName)
   try {
     const existingUser = await readOne(Account, { email });
     if (existingUser.success) {
