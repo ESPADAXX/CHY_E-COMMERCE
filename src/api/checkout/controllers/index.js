@@ -40,48 +40,46 @@ exports.cashPayment = async (req, res) => {
 
 exports.creditCardPayment = async (req, res) => {
     try {
-        const { cardName, cardNumber, cardDate, cardCvv } = req.body;
-
-        function isString(value) {
-            return typeof value === 'string';
-          }
-          
-          function isNumber(value) {
-            return typeof value === 'number';
-          }
-          
-          function isValidMonth(month) {
-            return parseInt(month, 10) >= 1 && parseInt(month, 10) <= 12;
-          }
-          
-          function isValidYear(year) {
-            const currentYear = new Date().getFullYear();
-            return parseInt(`20${year}`, 10) >= currentYear;
-          }
-          
-          function isDate(value) {
-            const currentDate = new Date();
-            const [month, year] = value.split('/');
-            const cardDate = new Date(parseInt(`20${year}`, 10), parseInt(month, 10) - 1);
-            return /^\d{2}\/\d{2}$/.test(value) && isValidMonth(month) && isValidYear(year) && cardDate >= currentDate;
-          }
-          
-          if (
-            isString(cardName) &&
-            isNumber(cardNumber) && 
-            cardNumber.toString().length === 16 &&
-            isDate(cardDate) &&
-            isNumber(cardCvv) &&
-            cardCvv.toString().length === 3
-          ){
-            res.send('Credit card information is valid');
-          // Process payment logic here
+      var totalProducts = []
+      const {order_id, user_id} = req.body
+      const account = await Account.findOne({ _id: user_id});
+      if (account) {
+        const order = await Order.findOne({_id : order_id});
+        if (order) {
+          var totalPrice = order.totalPrice
+          order.products.forEach(product => {totalProducts.push(product.title);}); 
+          const session = await stripe.checkout.sessions.create({
+            line_items: [
+              {
+                price_data: {
+                  currency: "mad",
+                  product_data: {
+                    name: req.body.user_id,
+                  },
+                  unit_amount: totalPrice * 100,
+                },
+                quantity: 1,
+              },
+            ],
+            mode: "payment",
+            success_url: `${req.protocol}://${req.get("host")}/cash`,
+            cancel_url: `${req.protocol}://${req.get("host")}/cart`,
+            // customer_email: req.user.email,
+            // client_reference_id: req.params.cartId,
+            metadata: req.body.shippingAddress,
+          });
+          var url = session.url;
+          res.status(201).json({ status: "success", data: totalProducts ,TotalPrice : totalPrice ,url });
         } else {
-          res.send('Invalid credit card information');
+          res.status(500).json({message : "order not found"}); 
         }
-                
+    } else {
+        res.status(500).json({message : "user not found"}); 
+    }    
     } catch (err) {
         console.error(err);
         res.status(500).send('Internal Server Error');
     }
 };
+
+
