@@ -18,10 +18,11 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 // in latest body-parser use like below.
 app.use(bodyParser.urlencoded({ extended: true }));
+app.set('trust proxy', 1);
 // Rate limiting middleware
 const limiter = rateLimit({
   windowMs:15* 60 * 1000, // 15 minutes
-  max: 50, // limit each IP to 50 requests per windowMs
+  max: 1000, // limit each IP to 50 requests per windowMs
 });
 
 app.use(limiter); // Apply the rate limiter
