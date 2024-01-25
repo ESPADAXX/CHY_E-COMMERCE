@@ -10,11 +10,7 @@ describe('AUTHENTICAT TESTS', () => {
         server.close();
         Account.collection.deleteMany();
     })
-<<<<<<< HEAD
-     it('should return error code 400 because the confirmation password not matches the password', async () => {
-=======
-     it.only('should return error code 400 because the confirmation password not matches the password', async () => {
->>>>>>> e9de816f6f73954f30115f2ef8a1e1783321cbab
+    it.only('should return error code 400 because the confirmation password not matches the password', async () => {
             const response = await Request(server)
                 .post('/auth/register')
                 .send({
