@@ -62,7 +62,9 @@ app.use(
 // ROUTES
 app.use("/", require("./api"));
 
-
+app.get("/test", (req,res) => {
+  return res.json({ result: "douraaai irhamnii" });
+})
 const server=app.listen(process.env.PORT, () => {
   console.log(`App listening on port ${process.env.PORT}`);
 });
