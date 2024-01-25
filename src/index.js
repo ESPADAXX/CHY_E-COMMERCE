@@ -62,6 +62,9 @@ app.use(
 // ROUTES
 app.use("/", require("./api"));
 
+app.get('/test', (req, res) => {
+  return res.json({data:'salalmslajfdlam'})
+})
 
 const server=app.listen(process.env.PORT, () => {
   console.log(`App listening on port ${process.env.PORT}`);
