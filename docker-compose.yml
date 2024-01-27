@@ -16,6 +16,7 @@ services:
       dockerfile: Dockerfile
     networks:
       - mynetwork
+    command: /wait && npm run dev
   mongo:
     image: mongo:latest
     container_name: mongo_container
@@ -23,7 +24,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - mongo_data:/app/db
+      - mongo_data:/data/db
     networks:
       - mynetwork
     healthcheck:
