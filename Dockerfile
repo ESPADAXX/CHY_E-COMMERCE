@@ -10,7 +10,8 @@ COPY . .
 
 EXPOSE 4444
 
-ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.8.0/wait /wait
-RUN chmod +x /wait
+# ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.8.0/wait /wait
+# RUN chmod +x /wait
 
-CMD /wait && npm run dev
+# CMD /wait && npm run dev
+CMD ["npm", "run", "dev"]
