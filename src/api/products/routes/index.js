@@ -4,12 +4,16 @@ const { create, updateOne, readAll, readOne, remove , search, filter } = require
 const isAuthenticated = require("../../../middlewares/isAuthenticate");
 // // GET ALL
 router.get("/",readAll); 
+
 // CREATE NEW
-router.post("/",create);
+router.post("/",isAuthenticated,isModerator,create);
+
 // GET ONE
 router.get("/:id", readOne);
+
 // UPDATE ONE
 router.put("/:id",isAuthenticated,isModerator,updateOne);
+
 // DELETE ONE
 router.delete("/:id",isAuthenticated,isModerator,remove);
 

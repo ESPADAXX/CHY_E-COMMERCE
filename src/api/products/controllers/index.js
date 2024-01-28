@@ -87,24 +87,62 @@ exports.create = async (req, res) => {
 // GET ALL
 exports.readAll = async (req, res) => {
     try {
-        const products = await readAll(Product);
-        if (products.success === false) {
+        const page = parseInt(req.query.page) || 1;
+        const pageSize = 10; // Number of products per page
+
+        const { success, status, data } = await readAllWithPagination(Product, page, pageSize);
+
+        if (success === false) {
             return res.status(400).json({
                 status: 400,
                 success: false,
-                message: products.message || "Bad Request",
+                message: data.message || 'Bad Request',
             });
         }
-        res.status(products.status).json(products);
+
+        res.status(status).json({ success, data });
     } catch (error) {
         res.status(500).json({
             status: 500,
             success: false,
-            message: "Internal Server Error",
-            error: error.message || "Something went wrong",
+            message: 'Internal Server Error',
+            error: error.message || 'Something went wrong',
         });
     }
 };
+
+// Helper function for readAll with pagination
+const readAllWithPagination = async (model, page, pageSize) => {
+    try {
+        const totalProducts = await model.countDocuments();
+        const totalPages = Math.ceil(totalProducts / pageSize);
+
+        const products = await model.find()
+            .skip((page - 1) * pageSize)
+            .limit(pageSize);
+
+        return {
+            success: true,
+            status: 200,
+            data: {
+                products,
+                pageInfo: {
+                    currentPage: page,
+                    totalPages: totalPages,
+                    pageSize: pageSize,
+                },
+            },
+        };
+    } catch (error) {
+        return {
+            success: false,
+            status: 500,
+            message: 'Internal Server Error',
+            error: error.message || 'Something went wrong',
+        };
+    }
+};
+
 
 // UPDATE ONE
 exports.updateOne = async (req, res) => {

@@ -7,7 +7,8 @@ const orders = require('./orders/routes');
 const transactions = require('./transactions/routes');
 const notifications = require('./notifications/routes');
 const shippings = require('./shippings/routes');
-const auth=require('./authentication/routes')
+const auth=require('./authentication/routes');
+const checkoutRoutes = require('./checkout/routes');
 
 app.use("/accounts", accounts);
 app.use("/categories", categories);
@@ -17,6 +18,8 @@ app.use("/orders", orders);
 app.use("/transactions", transactions);
 app.use("/notifications",notifications);
 app.use("/shippings",shippings);
-app.use("/auth", auth)
+app.use("/auth", auth);
+app.use('/', checkoutRoutes);
+
 
 module.exports = app;
