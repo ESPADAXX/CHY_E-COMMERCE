@@ -5,7 +5,7 @@ const { isModerator } = require("../../../middlewares/isModerator");
 const { create, updateOne, readAll, readOne, remove } = require("../controllers");
 
 // GET ALL
-router.get("/",readAll);
+router.get("/",isAuthenticated,isModerator,readAll);
 // CREATE NEW
 router.post("/",isAuthenticated,isAdmin,create);
 // GET ONE

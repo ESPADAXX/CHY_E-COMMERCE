@@ -26,7 +26,7 @@ exports.create = async (req, res) => {
       }
 
       // Check if thumbnail is included in the request
-      if (!req.files["thumbnail"] || req.files["thumbnail"].length === 0) {
+      if (!req.files.thumbnail || req.files.thumbnail.length === 0) {
         return res.status(400).json({
           status: 400,
           success: false,

@@ -4,8 +4,6 @@ const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
 const rateLimit = require("express-rate-limit"); 
-const app = express();
-
 const helmet = require("helmet")
 const bodyParser=require('body-parser')
 require("./config/db")();
