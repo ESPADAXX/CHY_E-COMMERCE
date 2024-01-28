@@ -10,7 +10,7 @@ router.get("/",readAll);
 // CREATE NEW
 router.post("/",uploadMiddleware,create);
 // GET ONE
-router.get("/:id",isAuthenticated,isModerator,readOne);
+router.get("/:id",readOne);
 // UPDATE ONE
 router.put("/:id",isAuthenticated,isModerator,updateOne);
 // DELETE ONE

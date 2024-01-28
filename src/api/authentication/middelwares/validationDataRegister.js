@@ -1,18 +1,18 @@
 const { body, validationResult } = require('express-validator');
 
 const RegisterValidation = [
-  body('fullName').trim().isLength({ min: 1 }).withMessage('Full name is required'),
+  body('fullName').trim().isLength({ min: 1 }).withMessage('Full name is required').escape(),
   body('email')
     .trim()
     .isLength({ min: 1 })
     .withMessage('Email is required')
     .isEmail()
-    .withMessage('Invalid email address'),
-  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
-  body('confirmPassword')
+    .withMessage('Invalid email address').escape(),
+  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long').escape(),
+  body('confirmPassword').escape()
     .custom((value, { req }) => {
       if (value !== req.body.password) {
-        throw new Error('Password do not match');
+        throw new Error('Passwords do not match');
       }
       return true;
     }),

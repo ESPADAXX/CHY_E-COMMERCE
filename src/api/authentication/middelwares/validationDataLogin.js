@@ -8,14 +8,14 @@ const loginValidation = [
     .withMessage('Email is required')
     .isEmail()
     .withMessage('Invalid email address')
-    .customSanitizer((value) => xss(value)), // Sanitize the email input with xss
+    .customSanitizer((value) => xss(value)).escape(), // Sanitize the email input with xss
 
   body('password')
     .isLength({ min: 6 })
     .withMessage('Password must be at least 6 characters long')
-    .matches(/^[a-zA-Z0-9!._]+$/, 'i')
-    .withMessage('Password must be alphanumeric with !, ., or _')
-    .customSanitizer((value) => xss(value)), // Sanitize the password input with xss
+    .customSanitizer((value) => xss(value)).escape(), // Sanitize the password input with xss
+    // .matches(/^[a-zA-Z0-9!._]+$/, 'i')
+    // .withMessage('Password must be alphanumeric with !, ., or _')
 ];
 
 const handleLoginValidationErrors = (req, res, next) => {

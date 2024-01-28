@@ -15,6 +15,7 @@ app.use((req, res, next) => {
   next();
 });
 
+const app = express();
 app.use(bodyParser.json());
 // in latest body-parser use like below.
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -40,7 +41,7 @@ app.use(
   cors({
     credentials: false,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3100"],
   })
 );
 
@@ -49,10 +50,10 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        scriptSrc: ["'self'"],
+        scriptSrc: ["'self'","http://localhost:3100"],
         styleSrc: ["'self'"],
         imgSrc: ["'self'"],
-        connectSrc: ["'self'","http://localhost:3000"], // Add localhost:3000
+        connectSrc: ["'self'","http://localhost:3100"], // Add localhost:3000
         fontSrc: ["'self'"],
       },
     },
